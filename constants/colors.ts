@@ -1,0 +1,96 @@
+export const Colors = {
+  primary: "#D28F3D",
+  secondary: "#1A2138",
+  background: "#FFFFFF",
+  surface: "#F5F5F5",
+  text: {
+    primary: "#1A2138",
+    secondary: "#666666",
+    light: "#999999",
+    inverse: "#FFFFFF",
+    social: "#111827",
+  },
+  border: "#E0E0E0",
+  divider: "#E0E0E0",
+  error: "#FF3B30",
+  success: "#34C759",
+  google: "#4285F4",
+  apple: "#000000",
+  placeholder: "#071835",
+  tagBg: "#D28F3D",
+  inputPlaceholder: "#07183599",
+  white: "#FCFEFF",
+  red: "#F44336",
+  greenSwitch: "#31F03D",
+  barIcon: "#1F294E99",
+  borderColor: "#E5E5E5",
+  onboardingBackground: "#0F2A44",
+  onboardingGradient: "#D28F3D80",
+  subtitle: "#00000080",
+  appBackground: "#F9F9F9",
+  settingsSubtitle: "#00000099",
+  switchColor: "#0DAC4C",
+  logoutText: "#ED1616",
+  bookingButton: "#faf5f0",
+  bookingButtonText: "#f8f0ea",
+  // waitingBg: "#F9E6D180",
+  waitingBg: "#E5E8FF",
+  completedBg: "#eafef1",
+  waiting: "#2035FF",
+  inProgressBg: "#F9E6D180",
+  serviceBg: "#f5f0e9",
+  // Service order status colors (api: pending, confirmed, in_progress, completed, cancelled)
+  statusPending: "#E6B800",
+  statusPendingBg: "#E6B80020",
+  statusConfirmed: "#D28F3D",
+  statusConfirmedBg: "#D28F3D20",
+  statusInProgress: "#42c0e4",
+  statusInProgressBg: "#42c0e420",
+  statusCompleted: "#34C759",
+  statusCompletedBg: "#34C75920",
+  statusCancelled: "#FF3B30",
+  statusCancelledBg: "#FF3B3020",
+  statusReadyForReceiving: "#D28F3D",
+  cafe: "#590926",
+};
+
+// Vue-aligned dark mode (spa.css: --color-background-dark, slate-800/700, etc.)
+export const Theme = {
+  light: {
+    ...Colors,
+    // Light mode: darker button for visibility, dark text for contrast
+    bookingButton: "#E5D4C4",
+    bookingButtonText: "#1A2138",
+  },
+  dark: {
+    ...Colors,
+    // Vue: --color-background-dark #0f172a (slate-900)
+    background: "#0f172a",
+    appBackground: "#0f172a",
+    surface: "#1e293b", // slate-800
+    text: {
+      primary: "#e2e8f0", // slate-200 (Vue .dark body color)
+      secondary: "#94a3b8", // slate-400
+      light: "#64748b", // slate-500
+      inverse: "#1e293b",
+      social: "#e2e8f0",
+    },
+    border: "#334155", // slate-700
+    divider: "#334155",
+    white: "#1e293b",
+    placeholder: "#94a3b8",
+    inputPlaceholder: "#94a3b899",
+    barIcon: "#e2e8f099",
+    borderColor: "#334155",
+    tagBg: "#D28F3D",
+    onboardingBackground: "#0f172a",
+    subtitle: "#94a3b8cc",
+    settingsSubtitle: "#94a3b8cc",
+    bookingButton: "#334155",
+    bookingButtonText: "#94a3b8",
+    waitingBg: "#1e3a5f",
+    completedBg: "#0f2e1a",
+    inProgressBg: "#1e293b80",
+    serviceBg: "#1e293b",
+  },
+};

@@ -1,0 +1,86 @@
+{
+  "expo": {
+    "name": "Pure Site",
+    "slug": "puresite",
+    "version": "1.0.2",
+    "orientation": "portrait",
+    "icon": "./assets/images/puresire_app_icon.png",
+    "scheme": "pure-site",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "icon": "./assets/images/puresire_app_icon.png",
+      "supportsTablet": true,
+      "bundleIdentifier": "com.afsc.PureSite",
+      "buildNumber": "3",
+      "entitlements": {
+        "com.apple.developer.in-app-payments": ["merchant.com.afsc.PureSite"]
+      },
+      "infoPlist": {
+        "NSCameraUsageDescription": "نستخدم الكاميرا لالتقاط صورة سيارتك أو صورة الملف الشخصي داخل التطبيق. مثال: عند تحديث صورة البروفايل مباشرة بالكاميرا.",
+        "NSPhotoLibraryUsageDescription": "نستخدم معرض الصور لاختيار صورة للملف الشخصي أو السيارة من جهازك. مثال: اختيار صورة موجودة مسبقًا لتحديث البروفايل.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "icon": "./assets/images/puresire_app_icon.png",
+      "googleServicesFile": "./google-services.json",
+      "package": "com.afsc.PureSite",
+      "versionCode": 3,
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/images/puresire_app_icon.png",
+        "backgroundImage": "./assets/images/puresire_app_icon.png",
+        "monochromeImage": "./assets/images/puresire_app_icon.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "permissions": ["NOTIFICATIONS"]
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/logo.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/logo.png",
+          "color": "#ffffff",
+          "mode": "production",
+          "enableBackgroundRemoteNotifications": true
+        }
+      ],
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/logo.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "image": "./assets/images/logo.png",
+            "imageWidth": 200,
+            "resizeMode": "contain",
+            "backgroundColor": "#000000"
+          }
+        }
+      ],
+      "expo-secure-store",
+      "expo-localization"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "supportsRTL": true,
+      "eas": {
+        "projectId": "765ecd54-396a-4f21-a0b1-a66319313438"
+      }
+    },
+    "owner": "ds212"
+  }
+}

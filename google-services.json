@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215128593543",
+    "project_id": "puresite-bf6dd",
+    "storage_bucket": "puresite-bf6dd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215128593543:android:bc68a77161acfb4234d422",
+        "android_client_info": {
+          "package_name": "com.afsc.PureSite"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDphdF0CgxIASeC7WWynrgAwNhI9WneTGY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expo Push Notification Test</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 560px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    h1 { font-size: 1.5rem; color: #1a1a1a; }
+    p { color: #666; font-size: 14px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+    input, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    textarea { min-height: 80px; resize: vertical; }
+    button {
+      background: #D28F3D;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    #result { margin-top: 20px; padding: 12px; border-radius: 8px; font-size: 14px; white-space: pre-wrap; word-break: break-all; }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+    .curl { background: #e9ecef; padding: 12px; border-radius: 8px; margin-top: 16px; font-size: 12px; overflow-x: auto; }
+    .curl code { display: block; white-space: pre-wrap; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Expo Push Notification Test</h1>
+  <p>Use this page to send a test notification to your app. No Firebase required — uses Expo's push API.</p>
+  <form id="form">
+    <label for="token">Expo Push Token</label>
+    <textarea id="token" placeholder="Replace with the token from Settings → Push notification test (or from dev logs). e.g. ExponentPushToken[xxx]"></textarea>
+    <label for="title">Title</label>
+    <input id="title" type="text" value="Test notification" placeholder="Notification title" />
+    <label for="body">Body / Description</label>
+    <textarea id="body" placeholder="Notification body">Hello from the test page. Sound and app icon use app defaults.</textarea>
+    <button type="submit" id="btn">Send notification</button>
+  </form>
+  <div id="result"></div>
+  <div class="curl" id="curlBox" style="display:none">
+    <strong>Or run this in terminal (curl):</strong>
+    <code id="curlCmd"></code>
+  </div>
+
+  <script>
+    const API = 'https://exp.host/--/api/v2/push/send';
+    const form = document.getElementById('form');
+    const result = document.getElementById('result');
+    const curlBox = document.getElementById('curlBox');
+    const curlCmd = document.getElementById('curlCmd');
+    const btn = document.getElementById('btn');
+
+    function showCurl(token, title, body) {
+      const bodyJson = JSON.stringify({
+        to: token.trim(),
+        sound: 'default',
+        title: title || 'Test',
+        body: body || 'Hello',
+      });
+      curlCmd.textContent = `curl -X POST ${API} \\
+  -H "Accept: application/json" \\
+  -H "Content-Type: application/json" \\
+  -d '${bodyJson.replace(/'/g, "'\\''")}'`;
+      curlBox.style.display = 'block';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const token = document.getElementById('token').value.trim();
+      const title = document.getElementById('title').value.trim() || 'Test notification';
+      const body = document.getElementById('body').value.trim() || 'Hello';
+
+      if (!token) {
+        result.className = 'error';
+        result.textContent = 'Please enter the token from Settings → Push notification test (or from dev logs).';
+        return;
+      }
+
+      btn.disabled = true;
+      result.textContent = 'Sending...';
+      result.className = '';
+
+      const payload = {
+        to: token,
+        sound: 'default',
+        title,
+        body,
+        data: { screen: '/(tabs)/home' },
+      };
+
+      showCurl(token, title, body);
+
+      try {
+        const res = await fetch(API, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+
+        if (data.data?.status === 'ok') {
+          result.className = 'success';
+          result.textContent = 'Notification sent. Check your device.';
+        } else {
+          result.className = 'error';
+          result.textContent = data.data?.message || JSON.stringify(data);
+        }
+      } catch (err) {
+        result.className = 'error';
+        result.textContent = err.message + '\n\nIf the browser blocked the request (CORS), use the curl command below or the in-app "Notification Test" screen.';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
